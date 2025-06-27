@@ -1,8 +1,11 @@
 import express from "express";
 import mongoose from "mongoose";
+import { profileUpdate } from "./controller.js";
+import { singleUpload } from "./multer.js";
+
 
 const app = express()
-
+app.use(express.json())
 
 const connectDB = () => {
     mongoose.connect("mongodb://localhost:27017", {
@@ -12,8 +15,13 @@ const connectDB = () => {
 
 connectDB()
 
+app.post('/api/profile', singleUpload, profileUpdate)
+
 app.get("/",(req,res)=>{
-    res.send("Working")
+    res.status(200).json({
+        success:true,
+        message:"App Working"
+    })
 })
 
 app.listen(3000,()=>{

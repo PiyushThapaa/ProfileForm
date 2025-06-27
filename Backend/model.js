@@ -19,6 +19,9 @@ const profileSchema = new mongoose.Schema({
         enum:["Student", "Developer", "Entrepreneur"],
         required: true
     },
+    companyname:{
+        type:String
+    },
     address:{
         type:String,
         required: true
