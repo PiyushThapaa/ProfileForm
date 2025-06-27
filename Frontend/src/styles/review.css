@@ -1,0 +1,42 @@
+.review-container {
+    max-width: 600px;
+    margin: 50px auto;
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    font-family: 'Segoe UI', sans-serif;
+  }
+  
+  h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 25px;
+  }
+  
+  .review-card {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .review-field {
+    font-size: 16px;
+    color: #444;
+    background: #f9f9f9;
+    padding: 10px 15px;
+    border-radius: 8px;
+    border-left: 5px solid #007bff;
+  }
+  
+  .image-preview {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .image-preview img {
+    max-width: 150px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+  }
+  

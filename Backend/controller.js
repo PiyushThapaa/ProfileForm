@@ -2,7 +2,7 @@ import { Profile } from "./model.js";
 
 export const profileUpdate = (req, res, next) => {
     try {
-        const { username, password, profession, address, country, city, state, subscription, newsletter } = req.body;
+        const { username, password, dob, gender, profession, address, country, city, state, subscription, newsletter } = req.body;
         const photo = req.file;
         if (!photo) return res.status(401).json({
             success: false,
@@ -12,6 +12,8 @@ export const profileUpdate = (req, res, next) => {
             username,
             photo: photo?.path,
             password,
+            dob,
+            gender,
             profession,
             address,
             country,

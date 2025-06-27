@@ -1,0 +1,38 @@
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px; /* Increased spacing between fields */
+  }
+  
+  button {
+    padding: 12px;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    border: none;
+    font-size: 16px;
+    transition: background 0.3s ease;
+  }
+  
+  /* Submit button */
+  button[type="submit"] {
+    background-color: #28a745; /* green */
+    color: white;
+    margin-top: 10px;
+  }
+  
+  button[type="submit"]:hover {
+    background-color: #218838;
+  }
+  
+  /* Profile Form button */
+  button.secondary {
+    background-color: #ffc107; /* yellow */
+    color: #333;
+    margin-top: 5px;
+  }
+  
+  button.secondary:hover {
+    background-color: #e0a800;
+  }
+  
