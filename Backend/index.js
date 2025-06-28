@@ -13,7 +13,7 @@ app.use(cors())
 app.use(express.json())
 
 const connectDB = () => {
-    mongoose.connect(process.env.MONGO_URL, {
+    mongoose.connect("mongodb://localhost:27017", {
         dbName: "ProfileFormBackend",
     }).then((c) => console.log(`Database connected with ${c.connection.host}`)).catch((e) => console.log(e))
 }
