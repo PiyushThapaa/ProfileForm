@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "../styles/form1.css";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
@@ -10,6 +10,12 @@ export const Form1 = () => {
   const [otherGender, setOtherGender] = useState("");
   const [dob, setDob] = useState("");
   const [gender, setGender] = useState("");
+  const [show,setShow] = useState(false);
+  const [message,setMessage] = useState("");
+  const [color,setColor] = useState("red");
+  const [passcolor,setPasscolor] = useState("red");
+  const [passmessage,setPassmessage] = useState("");
+  const [passshow,setPassshow] = useState(false);
 
   const handlePhotoChange = (e) => {
     const file = e.target.files[0];
@@ -22,6 +28,9 @@ export const Form1 = () => {
   const Navigate = useNavigate();
 
   function clickNext() {
+    if (username.includes(" ")) return toast.error("Username should not have spaces")
+    if (color=="red") return toast.error(message) 
+    if (passcolor=="red") return toast.error(passmessage) 
     let selectedGender = (gender == "other") ? otherGender : gender
     if (!username || !password || !dob || !selectedGender) {
       return toast.error("Please fill the entire form")
@@ -34,11 +43,42 @@ export const Form1 = () => {
     if (updatedDob > today) {
       return toast.error("Please enter a valid DOB")
     }
-
-    setValidDob(updatedDob)
+    setValidDob(updatedDob.toLocaleDateString())
     setValidGender(selectedGender)
     Navigate("/next")
   }
+
+  useEffect(()=>{
+    fetch("http://localhost:3000/api/username", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ username }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setMessage(data.message);
+        (data.success) ? setColor("green") : setColor("red")
+      });
+       (!username) ? setShow(false) : setShow(true)
+    },[username])
+
+    useEffect(()=>{
+      (!password) ? setPassshow(false) : setPassshow(true)
+      if (password.length < 9) {
+        setPassmessage("Password should have atleast 9 characters");
+        return setPasscolor("red")
+      }
+      if (!/\d/.test(password)) {
+      setPassmessage("Password should have atleast 1 number");
+       return setPasscolor("red")
+      }
+      if (!/[!@#$%^&*(),.?":{}|<>]/.test(password)) {
+        setPassmessage("Password should have contain atleast  one special character");
+        return setPasscolor("red")
+      }
+      setPassmessage("Password is strong")
+      setPasscolor("green")
+    },[password])
 
   return (
       <div className="form-container">
@@ -54,6 +94,7 @@ export const Form1 = () => {
               required
             />
           </label>
+          {show && <p style={{color:color,marginTop:-7}}>{message}</p>}
           <label>
             Date of Birth:
             <input
@@ -75,7 +116,7 @@ export const Form1 = () => {
               required
             />
           </label>
-
+          {passshow && <p style={{color:passcolor,marginTop:-7}}>{passmessage}</p>}
           <label>
             Gender:
             <div className="gender-options">

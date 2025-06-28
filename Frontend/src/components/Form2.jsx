@@ -32,13 +32,13 @@ export const Form2 = () => {
                         required
                     >
                         <option value="">Select Profession</option>
-                        <option value="student">Student</option>
-                        <option value="developer">Developer</option>
-                        <option value="entrepreneur">Entrepreneur</option>
+                        <option value="Student">Student</option>
+                        <option value="Developer">Developer</option>
+                        <option value="Entrepreneur">Entrepreneur</option>
                     </select>
                 </label>
 
-                {profession === "entrepreneur" && (
+                {profession === "Entrepreneur" && (
                     <label>
                         Company Name:
                         <input
